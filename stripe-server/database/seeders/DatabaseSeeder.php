@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
                 'name' => $product["name"],
                 'description' => $product["description"],
                 'image' => $product["images"][0],
-                'price' => $price["unit_amount"]/100,
+                'price' => $price['unit_amount']/100,
+                'currency_code' => $price['currency']
             ]);
         }
     }
