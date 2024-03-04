@@ -54,7 +54,7 @@ class ProductController extends Controller
         $order->session_id = $session->id;
         $order->save();
 
-        return redirect($session->url);
+        return response(["url" => $session->url], 200);
     }
 
     public function success(Request $request) {
