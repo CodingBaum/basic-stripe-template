@@ -30,14 +30,14 @@ class ProductController extends Controller
             $totalPrice += $product->price;
             $lineItems[] = [
                 'price_data' => [
-                        'currency' => $product->currency_code,
-                        'product_data' => [
-                            'name' => $product->name,
-                            'images' => [$product->image]
-                        ],
-                        'unit_amount' => $product->price * 100,
+                    'currency' => $product->currency_code,
+                    'product_data' => [
+                        'name' => $product->name,
+                        'images' => [$product->image]
                     ],
-                    'quantity' => 1,
+                    'unit_amount' => $product->price * 100,
+                ],
+                'quantity' => 1,
             ];
         }
         $session = Session::create([

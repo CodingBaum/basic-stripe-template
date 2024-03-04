@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->integer("price");
             $table->string("currency_code");
+            $table->timestamps();
         });
     }
 
