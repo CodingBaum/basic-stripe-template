@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
                 'prod_id' => $product["id"],
                 'name' => $product["name"],
                 'description' => $product["description"],
-                'image' => $product["name"],
+                'image' => $product["images"][0],
                 'price' => $price["unit_amount"]/100,
             ]);
         }
