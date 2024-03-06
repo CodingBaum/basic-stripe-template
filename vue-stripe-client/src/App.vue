@@ -29,9 +29,16 @@ export default {
 </script>
 
 <template>
-    <header>
-        <button @click="checkout">checkout</button>
-    </header>
+    <div id="product-wrapper">
+        <div v-for="product in products">
+            <div class="name">{{product.name}}</div>
+            <div class="description">{{product.description}}</div>
+            <img :src="product.image">
+            <div class="price">{{product.price}}</div>
+            <input type="checkbox">
+        </div>
+    </div>
+    <button @click="checkout">checkout</button>
 </template>
 
 <style scoped>
