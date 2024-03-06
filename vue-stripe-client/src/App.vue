@@ -3,6 +3,11 @@
 
 <script lang="ts">
 export default {
+    data() {
+        return {
+            products: []
+        }
+    },
     methods: {
         async checkout() {
             await fetch("http://localhost:8000/api/checkout", {
@@ -11,6 +16,14 @@ export default {
                 window.location.href = data.url;
             })
         }
+    },
+    mounted() {
+        fetch("http://localhost:8000/api/products")
+            .then(data => data.json())
+            .then(data => {
+                console.log(data)
+                this.products = data
+            })
     }
 }
 </script>
