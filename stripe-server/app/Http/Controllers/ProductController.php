@@ -20,10 +20,10 @@ class ProductController extends Controller
         return view('product.index', compact('products'));
     }
 
-    public function checkout() {
+    public function checkout(Request $request) {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
-        $products = Product::all();
+        $products = json_decode($request->getContent());
         $lineItems = [];
         $totalPrice = 0;
         foreach ($products as $product) {
@@ -52,9 +52,10 @@ class ProductController extends Controller
         $order->status = 'unpaid';
         $order->total_price = $totalPrice;
         $order->session_id = $session->id;
+        $order->redirect_url = $request->header('origin');
         $order->save();
 
-        return redirect($session->url);
+        return response(["url" => $session->url], 200);
     }
 
     public function success(Request $request) {

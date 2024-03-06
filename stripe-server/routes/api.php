@@ -20,6 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/checkout', [\App\Http\Controllers\ProductController::class, 'checkout']);
+
+Route::fallback(function () {
+    return response(404);
+});
+
 Route::get('products', function () {
     return ProductResource::collection(Product::all());
 });
