@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('products', function () {
-    return Product::all();
+    return ProductResource::collection(Product::all());
 });
