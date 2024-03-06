@@ -52,6 +52,7 @@ class ProductController extends Controller
         $order->status = 'unpaid';
         $order->total_price = $totalPrice;
         $order->session_id = $session->id;
+        $order->redirect_url = $request->header('origin');
         $order->save();
 
         return response(["url" => $session->url], 200);

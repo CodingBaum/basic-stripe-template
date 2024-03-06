@@ -61,7 +61,7 @@ export default {
                 <div class="description">{{product.description}}</div>
                 <img class="image" :src="product.image">
                 <div class="price">{{product.price}} {{product.currency_code === "eur" ? "€" : "$"}}</div>
-                <input type="checkbox" v-model="">
+                <input type="checkbox">
             </div>
         </div>
         <button @click="checkout">checkout</button>

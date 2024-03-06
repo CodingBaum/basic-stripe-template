@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string("session_id")->primary();
             $table->string("status");
             $table->decimal("total_price", 8, 2);
+            $table->string("redirect_url");
             $table->timestamps();
         });
     }
