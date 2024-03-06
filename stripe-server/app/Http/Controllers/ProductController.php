@@ -30,17 +30,17 @@ class ProductController extends Controller
             $totalPrice += $product->price;
             $lineItems[] = [
                 'price_data' => [
-                        'currency' => 'usd',
-                        'product_data' => [
-                            'name' => $product->name,
-                            'images' => [$product->image]
-                        ],
-                        'unit_amount' => $product->price * 100,
+                    'currency' => $product->currency_code,
+                    'product_data' => [
+                        'name' => $product->name,
+                        'images' => [$product->image]
                     ],
-                    'quantity' => 1,
+                    'unit_amount' => $product->price * 100,
+                ],
+                'quantity' => 1,
             ];
         }
-        $session = \Stripe\Checkout\Session::create([
+        $session = Session::create([
             'line_items' => $lineItems,
             'mode' => 'payment',
             'success_url' => route('checkout.success', [], true)."?session_id={CHECKOUT_SESSION_ID}",
