@@ -20,10 +20,10 @@ class ProductController extends Controller
         return view('product.index', compact('products'));
     }
 
-    public function checkout() {
+    public function checkout(Request $request) {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
-        $products = Product::all();
+        $products = json_decode($request->getContent());
         $lineItems = [];
         $totalPrice = 0;
         foreach ($products as $product) {

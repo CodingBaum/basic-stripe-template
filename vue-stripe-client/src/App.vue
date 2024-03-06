@@ -11,7 +11,33 @@ export default {
     methods: {
         async checkout() {
             await fetch("http://localhost:8000/api/checkout", {
-                method: "POST"
+                method: "POST",
+                body: JSON.stringify([
+                    {
+                        "prod_id": "prod_PgcgAdQasdMEr9",
+                        "name": "Online e-commerce course",
+                        "description": "An entry level e-commerce to take you back to the basics. Like a legend once said: \"Mak erscht ma die basics\"",
+                        "image": "https:\/\/files.stripe.com\/links\/MDB8YWNjdF8xT2xSTGNEbm9QNTBlaWZDfGZsX3Rlc3RfRXRWTHlXZnlCU01tME44WjR0aHRMeXVx00uFLuGwzz",
+                        "price": 199.99,
+                        "currency_code": "eur"
+                    },
+                    {
+                        "prod_id": "prod_Pgcbw18hsXRr4g",
+                        "name": "WLAN Kabel",
+                        "description": "Kabel für High Speed WLAN",
+                        "image": "https:\/\/files.stripe.com\/links\/MDB8YWNjdF8xT2xSTGNEbm9QNTBlaWZDfGZsX3Rlc3RfU3JlbVE1VUxUZ0Yxdm5EU3FVWUFZNjh500ngG9BzCC",
+                        "price": 20,
+                        "currency_code": "eur"
+                    },
+                    {
+                        "prod_id": "prod_Pgc6u8JXkTgjeD",
+                        "name": "1000 V-BUCKS FREE",
+                        "description": "GET 1000 V-BUCKS FOR FREE",
+                        "image": "https:\/\/files.stripe.com\/links\/MDB8YWNjdF8xT2xSTGNEbm9QNTBlaWZDfGZsX3Rlc3RfNk9kQXNRVWUyTDZiczRQU0NzRkRjYzly0076jMEQ2a",
+                        "price": 99.99,
+                        "currency_code": "eur"
+                    }
+                ])
             }).then(data => data.json()).then(data => {
                 window.location.href = data.url;
             })
@@ -21,7 +47,6 @@ export default {
         fetch("http://localhost:8000/api/products")
             .then(data => data.json())
             .then(data => {
-                console.log(data)
                 this.products = data
             })
     }
@@ -29,19 +54,47 @@ export default {
 </script>
 
 <template>
-    <div id="product-wrapper">
-        <div v-for="product in products">
-            <div class="name">{{product.name}}</div>
-            <div class="description">{{product.description}}</div>
-            <img :src="product.image">
-            <div class="price">{{product.price}}</div>
-            <input type="checkbox">
+    <div id="wrapper">
+        <div id="product-wrapper">
+            <div class="product" v-for="product in products">
+                <div class="name">{{product.name}}</div>
+                <div class="description">{{product.description}}</div>
+                <img class="image" :src="product.image">
+                <div class="price">{{product.price}} {{product.currency_code === "eur" ? "€" : "$"}}</div>
+                <input type="checkbox" v-model="">
+            </div>
         </div>
+        <button @click="checkout">checkout</button>
     </div>
-    <button @click="checkout">checkout</button>
 </template>
 
 <style scoped>
+#wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#product-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.product {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.name {
+    font-size: large;
+    font-weight: bold;
+}
+
+.image {
+    max-width: 200px;
+}
+
 header {
     line-height: 1.5;
     max-height: 100vh;
