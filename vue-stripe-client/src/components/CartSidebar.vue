@@ -1,23 +1,10 @@
 <script lang="ts" setup>
-import {onMounted, ref} from "vue";
-import type {Ref} from "vue";
-import Product from "@/models/Product";
-
-const cart: Ref<Product[]> = ref([]);
-
-function getItem<T>(key: string): T | null {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) as T : null;
-}
+import {addToCart, cart, getCart, removeFromCart} from "@/services/CartService";
+import {onMounted} from "vue";
 
 onMounted(() => {
-    let cartFromLocalStorage: Product[] | null = getItem("cart");
-
-    if (cartFromLocalStorage != null) {
-        cart.value = cartFromLocalStorage;
-    }
-});
-
+    getCart();
+})
 </script>
 
 <template>
@@ -25,6 +12,8 @@ onMounted(() => {
         <div v-for="(product, index) in cart" :key="index">
             {{ product.name }}
             {{ product.quantity }}
+            <button @click="addToCart(product)">+</button>
+            <button @click="removeFromCart(product)">-</button>
         </div>
     </div>
 </template>
