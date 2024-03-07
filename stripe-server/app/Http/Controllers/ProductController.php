@@ -27,7 +27,7 @@ class ProductController extends Controller
         $lineItems = [];
         $totalPrice = 0;
         foreach ($products as $product) {
-            $totalPrice += $product->price;
+            $totalPrice += $product->price * $product->quantity;
             $lineItems[] = [
                 'price_data' => [
                     'currency' => $product->currency_code,
@@ -37,7 +37,7 @@ class ProductController extends Controller
                     ],
                     'unit_amount' => $product->price * 100,
                 ],
-                'quantity' => 1,
+                'quantity' => $product->quantity,
             ];
         }
         $session = Session::create([
