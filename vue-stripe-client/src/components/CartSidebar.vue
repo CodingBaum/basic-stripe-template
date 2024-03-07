@@ -5,6 +5,15 @@ import {onMounted} from "vue";
 onMounted(() => {
     getCart();
 })
+
+function checkout() {
+    fetch("http://localhost:8000/api/checkout", {
+        method: "POST",
+        body: JSON.stringify(cart.value)
+    }).then(data => data.json()).then(data => {
+        window.location.href = data.url;
+    })
+}
 </script>
 
 <template>
@@ -15,6 +24,7 @@ onMounted(() => {
             <button @click="addToCart(product)">+</button>
             <button @click="removeFromCart(product)">-</button>
         </div>
+        <button v-if="cart.length" @click="checkout">Checkout</button>
     </div>
 </template>
 
