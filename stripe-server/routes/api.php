@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/checkout', [\App\Http\Controllers\ProductController::class, 'checkout']);
+Route::post('/checkout', [ProductController::class, 'checkout']);
 
 Route::fallback(function () {
     return response(404);
