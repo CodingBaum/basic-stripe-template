@@ -78,15 +78,32 @@ class ProductController extends Controller
                 $order->save();
             }
 
-            return view('product.checkout-success', compact('customer'));
+            return view('product.checkout-success', compact('customer', 'order', 'session'));
 
         } catch (\Exception $e) {
             throw new NotFoundHttpException;
         }
     }
 
-    public function cancel() {
+    public function cancel(Request $request) {
+        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $session_id = $request->get('session_id');
 
+        try {
+            $session = Session::retrieve($session_id);
+            if (!$session) {
+                throw new NotFoundHttpException;
+            }
+
+            $order = Order::where('session_id', $session->id)->first();
+            if (!$order) {
+                throw new NotFoundHttpException();
+            }
+
+            return redirect($order->redirect_url);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException;
+        }
     }
 
     public function webhook() {
