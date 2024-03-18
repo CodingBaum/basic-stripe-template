@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
+
+    <link href="{{ asset('styles.css') }}" rel="stylesheet">
 </head>
 <body class="antialiased">
-   <h1>Success</h1>
-    <p>{{$customer->name}}</p>
+    <div class="center">
+        <div class="container">
+            <h1>Thank you for your purchase, {{$customer->name}}!</h1>
+
+
+            <a href="{{$order->redirect_url}}" class="continue-link">Continue</a>
+        </div>
+    </div>
 </body>
 </html>
