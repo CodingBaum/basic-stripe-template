@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import {addToCart, fetchProducts, products} from "@/services/CartService";
-import {onMounted} from "vue";
-
-onMounted(() => {
-    fetchProducts();
-})
+import ProductListing from "@/components/ProductListing.vue";
 </script>
 
 <template>
-    <main>
-        <div v-for="(product, index) in products" :key="index">
-            {{ product.name }}
-            <button @click="addToCart(product)">Add to cart</button>
-        </div>
-    </main>
+  <main>
+    <ProductListing/>
+  </main>
 </template>
+
+<style>
+main {
+  background-color: #F5F3F5;
+  min-height: 100vh;
+}
+</style>

@@ -3,16 +3,16 @@ import {addToCart, cart, getCart, removeFromCart} from "@/services/CartService";
 import {onMounted} from "vue";
 
 onMounted(() => {
-    getCart();
+  getCart();
 })
 
 function checkout() {
-    fetch("http://localhost:8000/api/checkout", {
-        method: "POST",
-        body: JSON.stringify(cart.value)
-    }).then(data => data.json()).then(data => {
-        window.location.href = data.url;
-    })
+  fetch("http://localhost:8000/api/checkout", {
+    method: "POST",
+    body: JSON.stringify(cart.value)
+  }).then(data => data.json()).then(data => {
+    window.location.href = data.url;
+  })
 }
 </script>
 
@@ -97,5 +97,10 @@ function checkout() {
 
 .product-name-quantity {
 
+}
+
+.list-entry{
+  display: flex;
+  flex-direction: column;
 }
 </style>
