@@ -3,7 +3,7 @@ import Product from "@/models/Product";
 import type {Ref} from "vue";
 
 export const cart: Ref<Product[]> = ref([]);
-export const cartOpen: Ref<Boolean> = ref(true);
+export const cartOpen: Ref<Boolean> = ref(false);
 export const products: Ref<Product[]> = ref([]);
 export function fetchProducts() {
     if (!products.value.length) {
