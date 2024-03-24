@@ -27,3 +27,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@font-face {
+  font-family: "FireSans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("FireSans Regular"), local("FireSans-Regular"), url("fonts/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FireSans";
+  font-style: normal;
+  font-weight: 500;
+  src: local("FireSans Medium"), local("FireSans-Medium"), url("fonts/FiraSans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FireSans";
+  font-style: normal;
+  font-weight: 300;
+  src: local("FireSans Light"), local("FireSans-Light"), url("fonts/FiraSans-Light.ttf") format("truetype");
+}
