@@ -51,6 +51,7 @@ function checkout() {
     <div v-show="itemCount" class="item-count">{{ itemCount }}</div>
   </div>
   <div :class="{ 'cart-sidebar-wrapper': true, 'wrapper-open': cartOpen, 'wrapper-closed': !cartOpen }">
+    <div class="close-container" @click="cartOpen = false"></div>
     <div :class="{ 'cart-sidebar-container': true, 'container-open': cartOpen, 'container-closed': !cartOpen }">
       <nav class="close-nav">
         <div class="close-button">
@@ -130,6 +131,10 @@ function checkout() {
 .wrapper-open {
   background: rgba(0, 0, 0, 0.3);
   animation-name: fade-in;
+}
+
+.close-container {
+  width: 100%;
 }
 
 .cart-sidebar-container {
