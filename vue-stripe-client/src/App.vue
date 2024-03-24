@@ -4,7 +4,6 @@ import CartSidebar from "@/components/CartSidebar.vue";
 
 <template>
     <main>
-        <CartSidebar/>
         <RouterView/>
     </main>
 </template>

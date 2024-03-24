@@ -1,22 +1,32 @@
 <script lang="ts" setup>
 import {addToCart} from "@/services/CartService";
 import type Product from "@/models/Product";
+import {ref} from "vue";
 
 defineProps<{
   product: Product
 }>();
+
+const popupOpen = ref(false);
 </script>
 
 <template>
   <div class="product-container">
-    <img :src="product.image"/>
+    <img :src="product.image" @click="popupOpen=!popupOpen"/>
     <div class="info-section">
-      <div class="title" :title="product.name">{{ product.name }}</div>
+      <div class="title" :title="product.name"  @click="popupOpen=!popupOpen">{{ product.name }}</div>
       <div class="price">{{ product.price }} {{ product.currency_code == "eur" ? "€" : "$" }}</div>
       <div class="button-container">
         <button @click="addToCart(product)">Add to cart</button>
         <div class="button-line"/>
       </div>
+    </div>
+  </div>
+  <div v-show="popupOpen"
+       :class="{'product-popup-wrapper':true, 'popup-open':popupOpen, 'popup-closed':!popupOpen}"
+       @click="popupOpen=false">
+    <div class="prodcut-popup">
+
     </div>
   </div>
 </template>
@@ -103,5 +113,54 @@ button {
 
 button:hover {
   cursor: pointer;
+}
+
+.title:hover, img:hover{
+  cursor: pointer;
+}
+
+.product-popup-wrapper{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  animation-duration: 1.25s;
+  animation-timing-function: ease-out;
+}
+
+.popup-closed {
+  background: rgba(0, 0, 0, 0);
+  z-index: -1;
+  animation-name: fade-out;
+
+}
+
+.popup-open {
+  background: rgba(0, 0, 0, 0.3);
+  animation-name: fade-in;
+}
+
+@keyframes fade-in {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+
+  to {
+    background: rgba(0, 0, 0, 0);
+    z-index: -1;
+  }
 }
 </style>
