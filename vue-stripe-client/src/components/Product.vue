@@ -22,11 +22,10 @@ const popupOpen = ref(false);
       </div>
     </div>
   </div>
-  <div v-show="popupOpen"
-       :class="{'product-popup-wrapper':true, 'popup-open':popupOpen, 'popup-closed':!popupOpen}"
+  <div :class="{'product-popup-wrapper':true, 'popup-open':popupOpen, 'popup-closed':!popupOpen}"
        @click="popupOpen=false">
-    <div class="prodcut-popup">
-
+    <div class="product-popup">
+      HALLO
     </div>
   </div>
 </template>
@@ -119,15 +118,21 @@ button:hover {
   cursor: pointer;
 }
 
-.product-popup-wrapper{
+.product-popup-wrapper {
   position: fixed;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  right: 0;
   top: 0;
-  left: 0;
+  display: flex;
 
-  animation-duration: 1.25s;
+  animation-duration: 0.25s;
   animation-timing-function: ease-out;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .popup-closed {
@@ -140,6 +145,13 @@ button:hover {
 .popup-open {
   background: rgba(0, 0, 0, 0.3);
   animation-name: fade-in;
+}
+
+.product-popup{
+  height: 500px;
+  width: clamp(200px,80vw,800px);
+  background-color: red;
+  z-index: 3;
 }
 
 @keyframes fade-in {
