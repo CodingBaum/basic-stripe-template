@@ -3,6 +3,7 @@ import Product from "@/models/Product";
 import type {Ref} from "vue";
 
 export const cart: Ref<Product[]> = ref([]);
+export const cartOpen: Ref<Boolean> = ref(true);
 export const products: Ref<Product[]> = ref([]);
 export function fetchProducts() {
     if (!products.value.length) {
@@ -73,6 +74,28 @@ export function removeFromCart(product: Product) {
         }
 
         cartItem.quantity--;
+
+        return cartItem;
+    });
+
+    cart.value = cart.value.filter((cartItem: Product) => cartItem.quantity > 0);
+
+    setItem("cart", cart.value);
+}
+
+export function removeAllFromCart(product: Product) {
+    getCart();
+
+    if (!cart.value.some((cartItem: Product) => cartItem.prod_id === product.prod_id)) {
+        return;
+    }
+
+    cart.value = cart.value.map((cartItem: Product) => {
+        if (cartItem.prod_id !== product.prod_id) {
+            return cartItem;
+        }
+
+        cartItem.quantity = 0;
 
         return cartItem;
     });

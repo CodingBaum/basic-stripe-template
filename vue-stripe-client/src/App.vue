@@ -3,10 +3,10 @@ import CartSidebar from "@/components/CartSidebar.vue";
 </script>
 
 <template>
-    <main>
-        <CartSidebar/>
-        <RouterView/>
-    </main>
+  <main>
+    <CartSidebar/>
+    <RouterView/>
+  </main>
 </template>
 
 <style scoped></style>
