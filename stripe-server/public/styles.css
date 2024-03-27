@@ -1,6 +1,5 @@
 * {
-    font-family: "Roboto Light";
-    color: white;
+    font-family: Calibri;
 }
 
 html {
@@ -25,19 +24,42 @@ body {
 
 .container {
     border-radius: 1rem;
-    background-color: #9cb6d3;
     padding: 2em;
     height: 80%;
     max-height: 80%;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-a:hover {
-    color: #d3d3d3;
+a {
+    color: black;
+    text-decoration: none;
 }
 
-.continue-link {
-    position: absolute;
-    bottom: 2rem;
-    right: 3rem;
+div.button-line {
+    height: 1px;
+    width: 0;
+    background-color: black;
+}
+
+.button-container:hover {
+    cursor: pointer;
+
+    .button-line {
+        width: 100%;
+        animation-name: underline;
+        animation-duration: 0.25s;
+        animation-timing-function: ease-out;
+    }
+}
+
+@keyframes underline {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
 }

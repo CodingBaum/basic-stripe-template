@@ -11,10 +11,16 @@
 <body class="antialiased">
     <div class="center">
         <div class="container">
-            <h1>Thank you for your purchase, {{$customer->name}}!</h1>
+            <h2>Thank you for your purchase, {{$customer->name}} !</h2>
 
+            <div>You got hold of: </div>
 
-            <a href="{{$order->redirect_url}}" class="continue-link">Continue</a>
+            <div>This results in a total Price of {{ '<Price>' }}.</div>
+
+            <div class="button-container">
+                <a href="{{$order->redirect_url}}" class="continue-link">Return to Shop</a>
+                <div class="button-line"></div>
+            </div>
         </div>
     </div>
 </body>
