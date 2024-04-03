@@ -16,15 +16,6 @@ onMounted(() => {
     <Product v-for="(product, index) in products"
              :key="index"
              :product="product"/>
-    <Product v-for="(product, index) in products"
-             :key="index"
-             :product="product"/>
-    <Product v-for="(product, index) in products"
-             :key="index"
-             :product="product"/>
-    <Product v-for="(product, index) in products"
-             :key="index"
-             :product="product"/>
   </div>
 </template>
 
