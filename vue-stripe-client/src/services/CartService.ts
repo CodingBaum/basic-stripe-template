@@ -11,7 +11,6 @@ export function fetchProducts() {
             .then(data => data.json())
             .then(data => {
                 products.value = data
-                console.log("data ", products.value)
             });
     }
 
