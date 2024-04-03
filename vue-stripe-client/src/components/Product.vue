@@ -22,7 +22,8 @@ const popupOpen = ref(false);
       </div>
     </div>
   </div>
-  <div :class="{'product-popup-wrapper':true, 'popup-open':popupOpen, 'popup-closed':!popupOpen}">
+  <div class="product-popup-wrapper" v-if="popupOpen">
+    <div class="product-popup-background" @click="popupOpen = false"></div>
     <div class="product-popup">
       <nav class="close-nav">
         <div class="close-button">
@@ -150,25 +151,21 @@ button:hover {
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
 
-  display: flex;
   justify-content: center;
   align-items: center;
 
 }
 
-.popup-closed {
-  background: rgba(0, 0, 0, 0);
-  z-index: -1;
-  animation-name: fade-out;
-
-}
-
-.popup-open {
+.product-popup-background {
   background: rgba(0, 0, 0, 0.3);
-  animation-name: fade-in;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
 }
 
 .product-popup {
+  z-index: 1;
   max-height: 500px;
   width: clamp(200px, 80vw, 800px);
   background-color: white;
