@@ -30,6 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
 }
 
 a {
@@ -62,4 +63,33 @@ div.button-line {
     100% {
         width: 100%;
     }
+}
+
+.product-image {
+    width: 4rem;
+    border-radius: .3rem;
+}
+
+.product-name {
+    font-weight: bold;
+}
+
+.product-container {
+    display: flex;
+    flex-direction: row;
+    width: 24rem;
+    height: 4rem;
+    padding: 1rem;
+    border-bottom: 1px solid lightgray;
+}
+
+.product-container:last-child {
+    border-bottom: none !important;
+}
+
+.product-label-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 1rem;
 }

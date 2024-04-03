@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -48,6 +49,18 @@ class ProductController extends Controller
             'customer_creation' => "always"
         ]);
 
+        foreach ($products as $product) {
+            $orderProduct = new OrderProduct();
+            $orderProduct->name = $product->name;
+            $orderProduct->description = $product->description;
+            $orderProduct->image = $product->image;
+            $orderProduct->quantity = $product->quantity;
+            $orderProduct->price = $product->price*100;
+            $orderProduct->currency_code = $product->currency_code;
+            $orderProduct->fk_session_id = $session->id;
+            $orderProduct->save();
+        }
+
         $order = new Order();
         $order->status = 'unpaid';
         $order->total_price = $totalPrice;
@@ -62,7 +75,7 @@ class ProductController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
         $session_id = $request->get('session_id');
 
-        try {
+        //try {
             $session = Session::retrieve($session_id);
             if (!$session) {
                 throw new NotFoundHttpException;
@@ -78,11 +91,13 @@ class ProductController extends Controller
                 $order->save();
             }
 
-            return view('product.checkout-success', compact('customer', 'order', 'session'));
+            $products = OrderProduct::all()->where('fk_session_id', $session_id);
 
-        } catch (\Exception $e) {
+            return view('product.checkout-success', compact('customer', 'order', 'products'));
+
+        /*} catch (\Exception $e) {
             throw new NotFoundHttpException;
-        }
+        }*/
     }
 
     public function cancel(Request $request) {
