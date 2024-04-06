@@ -23,7 +23,11 @@
                         <div class="product-name">
                             {{$product->name}}
                         </div>
-                        <div>{{$product->quantity}} * {{$product->price/100}} €</div>
+                        <div>{{$product->quantity}}
+                            <img class="multiply"
+                                 src="{{asset('remove.svg')}}"
+                                 alt="remove icon">
+                            {{$product->price/100}} {{ $product->currency_code == "eur" ? "€" : "$" }}</div>
                     </div>
                 </div>
             @endforeach

@@ -93,3 +93,9 @@ div.button-line {
     justify-content: space-around;
     margin-left: 1rem;
 }
+
+.multiply {
+    height: 12px;
+    width: 12px;
+    padding-top: 2px;
+}
