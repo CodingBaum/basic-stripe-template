@@ -9,13 +9,37 @@
     <link href="{{ asset('styles.css') }}" rel="stylesheet">
 </head>
 <body class="antialiased">
-    <div class="center">
-        <div class="container">
-            <h1>Thank you for your purchase, {{$customer->name}}!</h1>
+<div class="center">
+    <div class="container">
+        <h2>Thank you for your purchase, {{$customer->name}} !</h2>
 
+        <div>You got hold of:</div>
 
-            <a href="{{$order->redirect_url}}" class="continue-link">Continue</a>
+        <div id="products">
+            @foreach($products as $product)
+                <div class="product-container">
+                    <img class="product-image" src="{{$product->image}}">
+                    <div class="product-label-container">
+                        <div class="product-name">
+                            {{$product->name}}
+                        </div>
+                        <div>{{$product->quantity}}
+                            <img class="multiply"
+                                 src="{{asset('remove.svg')}}"
+                                 alt="remove icon">
+                            {{$product->price/100}} {{ $product->currency_code == "eur" ? "€" : "$" }}</div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div>This results in a total Price of <b>{{ $order->total_price }}€</b>.</div>
+
+        <div class="button-container">
+            <a href="{{$order->redirect_url}}" class="continue-link">Return to Shop</a>
+            <div class="button-line"></div>
         </div>
     </div>
+</div>
 </body>
 </html>
